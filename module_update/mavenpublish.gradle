@@ -1,0 +1,48 @@
+apply plugin: 'maven-publish'
+
+def GroupId = 'com.dhn'
+def ArtifactId = 'common-message'
+def Version = '1.0.0.1'
+
+def userName = MAVEN_USERNAME
+def passWord = MAVEN_PASSWORD
+
+def releasesRepoUrl = "http://nexus.pengpengla.com:8081/nexus/content/repositories/pplib/"
+
+afterEvaluate {
+    publishing {
+        //发布的 jar 包配置
+        publications {
+            release(MavenPublication) {
+                groupId = GroupId
+                artifactId = ArtifactId
+                version = Version
+
+                afterEvaluate { artifact(tasks.getByName("bundleReleaseAar")) }
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode("dependencies")
+                    configurations.implementation.allDependencies.forEach() {
+                        Dependency dependency ->
+                            if (dependency.version != "unspecified" && dependency.name != "unspecified") {
+                                def dependencyNode = dependenciesNode.appendNode('dependency')
+                                dependencyNode.appendNode('groupId', dependency.group)
+                                dependencyNode.appendNode('artifactId', dependency.name)
+                                dependencyNode.appendNode('version', dependency.version)
+                            }
+                    }
+                }
+            }
+        }
+        //仓库地址配置
+        repositories {
+            maven {
+                allowInsecureProtocol = true
+                url = releasesRepoUrl
+                credentials {
+                    username = userName
+                    password = passWord
+                }
+            }
+        }
+    }
+}
