@@ -92,7 +92,7 @@ echo "####### 前缀+更新版本号：${prefix}${updateVersionCode}"
 
 sed -i "_bak_`date`" "s/${prefix}${currentVersionCode}/${prefix}${updateVersionCode}/g"  $dhnHtml
 
-sh dhn_html_git.sh  "nav" "增加脚本" ""
+sh dhn_html_git.sh  "nav" "增加脚本" "master"
 
 
 
