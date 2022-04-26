@@ -90,7 +90,7 @@ echo "####### 前缀+当前版本号：${prefix}${currentVersionCode}"
 echo "####### 前缀+更新版本号：${prefix}${updateVersionCode}"
 
 
-sed -i "_bak_`date`" "s/${prefix}${currentVersionCode}/${prefix}${updateVersionCode}/g"  "index.html"
+sed -i "_bak_`date`" "s/${prefix}${currentVersionCode}/${prefix}${updateVersionCode}/g"  $dhnHtml
 
 sh dhn_html_git.sh  "nav" "增加脚本" ""
 
