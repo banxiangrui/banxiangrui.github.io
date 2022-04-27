@@ -62,12 +62,17 @@ sleep 1s
  
 echo "####### 开始推送 #######"
  
-if [ ! $3 ||[ $currentVersionCode == "" ]]
+if [ ! $3 ]
 then
   echo "####### 请输入自己提交代码的分支 #######"
   exit;
 fi
- 
+if [[ $3 == "" ]]
+then
+ echo "####### 请输入自己提交代码的分支 #######"
+  exit;
+fi
+
 git push origin "$3"
  
 echo "####### 推送成功 #######"
