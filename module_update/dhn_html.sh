@@ -21,7 +21,9 @@ dhnHtml=${dhnHtmlPath}"index.html"
 echo "####### 获取最新html并更新本地html #######"
 # wget -O index.html  https://banxiangrui.github.io/dhn/cn/index.html 
 
-
+echo "1111"$1
+echo "2222"$2
+echo "3333"$3
 if [ ! $1 ]
 then
   echo "####### 请输入需要更新的库 #######"
@@ -71,6 +73,7 @@ done < $dhnHtml
 
 #替换版本号内容
 updateVersionCode=$2
+echo "updateVersionCode==$updateVersionCode"
 echo
 if [[ $currentVersionCode == "" ]]
 then
