@@ -62,7 +62,7 @@ sleep 1s
  
 echo "####### 开始推送 #######"
  
-if [ ! $3 ]
+if [ ! $3 ||[ $currentVersionCode == "" ]]
 then
   echo "####### 请输入自己提交代码的分支 #######"
   exit;
